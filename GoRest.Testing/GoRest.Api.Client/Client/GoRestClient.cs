@@ -28,7 +28,7 @@ namespace GoRest.Api.Client.Client
             
             var httpClient = client.CreateHttpClient(new Dictionary<string, string>());
             var restClient = client.CreateRestClient<T>(httpClient)
-                .AddValidAuthHeader("1471c9cece25b11a29b5cd36f0a956dad30e0f1823df6175a11840878e2c59e8");
+                .AddValidAuthHeader(AppSettings.AuthKey);
             
             return restClient;
         }
@@ -38,7 +38,7 @@ namespace GoRest.Api.Client.Client
             var handler = new HttpClientHandler {UseCookies = true, CookieContainer = _cookieContainer};
             var httpClient = new HttpClient(handler)
             {
-                BaseAddress = new Uri("https://gorest.co.in/public-api/")
+                BaseAddress = AppSettings.ApplicationUrl
             };
             foreach (var header in headers) httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
 
