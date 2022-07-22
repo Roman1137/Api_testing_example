@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
+using FluentAssertions;
 using GoRest.Api.Client.Client;
 using GoRest.Api.Client.Client.Interfaces.Controllers;
 using GoRest.Api.Client.Client.Models.UsersApi;
@@ -27,8 +28,8 @@ namespace ApiTests.Users
             var response = await GoRestClient.For<IUsersApi>().CreateUser(userModel);
 
             // Assert
-            Assert.That(response.Code, Is.EqualTo(HttpStatusCode.Created));
-            Assert.That(response.Data.Id, Is.Positive);
+            response.Code.Should().Be(HttpStatusCode.Created);
+            response.Data.Id.Should().BePositive();
         }
     }
 }

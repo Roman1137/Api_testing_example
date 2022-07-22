@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
+using FluentAssertions;
 using GoRest.Api.Client.Client;
 using GoRest.Api.Client.Client.Interfaces.Controllers;
 using NUnit.Framework;
@@ -16,9 +17,9 @@ namespace ApiTests.Users
             var client = await GoRestClient.For<IUsersApi>().GetAll();
             
             // Assert
-            Assert.That(client.Code, Is.EqualTo(HttpStatusCode.OK));
-            Assert.That(client.Meta, Is.Not.Null);
-            Assert.That(client.Data, Is.Not.Empty);
+            client.Code.Should().Be(HttpStatusCode.OK);
+            client.Meta.Should().NotBeNull();
+            client.Data.Should().NotBeEmpty();
         }
         
         // verify pagination
