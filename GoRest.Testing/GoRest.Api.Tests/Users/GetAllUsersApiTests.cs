@@ -14,12 +14,12 @@ namespace ApiTests.Users
         public async Task Verify_GetAllUsers_Endpoint_ReturnsInfo()
         {
             // Arrange & Act
-            var client = await GoRestClient.For<IUsersApi>().GetAll();
+            var users = await GoRestClient.For<IUsersApi>().GetAll();
             
             // Assert
-            client.Code.Should().Be(HttpStatusCode.OK);
-            client.Meta.Should().NotBeNull();
-            client.Data.Should().NotBeEmpty();
+            users.Code.Should().Be(HttpStatusCode.OK);
+            users.Meta.Should().NotBeNull();
+            users.Data.Should().NotBeEmpty();
         }
         
         // verify pagination
